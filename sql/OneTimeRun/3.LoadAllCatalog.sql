@@ -3,6 +3,31 @@
 COPY All_catalogs FROM '/home/analyst/Desktop/AllCatalogs.csv' with (FORMAT CSV); 
 
 
+--This table holds the item attributes for each item and is key to this application
+DROP FOREIGN TABLE IF Exists Products;  
+DROP TABLE IF Exists Products; 
+CREATE TABLE Products  (  
+	 "Unique ID" text, 
+	 "Manufacturer Name" text,  
+	 "Manufacturer Part Number" text, 
+	 "Packaging UOM" text   
+);
+
+
+--This table holds all instances of pricing approved into an ePro environment
+DROP FOREIGN TABLE IF EXISTS Pricing;  
+DROP TABLE IF EXISTS Pricing;
+CREATE TABLE Pricing ( 
+	  "Unique ID" text,  
+	  "Campus" text,
+	  "Supplier" text,
+	  "Part Number" text,
+	  "Price" text,
+	  "Date Uploaded" text   
+);
+
+
+
 --Split the AllCatalogs table into Products and Pricing
 INSERT INTO  
  	Products ("Unique ID",
@@ -17,23 +42,12 @@ SELECT
 FROM  
 	All_Catalogs; 
 
-DROP FOREIGN TABLE IF EXISTS Pricing;  
-DROP TABLE IF EXISTS Pricing;
-CREATE TABLE Pricing ( 
-	  "Unique ID" text,  
-	  "Campus" text,
-	  "Distributor" text,
-	  "Distributor Part Number" text,
-	  "Price" text,
-	  "Date Uploaded" text   
-);
-
 --Split out the AllCatalogs table in Pricing (Modified from Alexis' Code)
 INSERT INTO 
 	Pricing ("Unique ID",
 		 "Campus",
-		 "Distributor",
-		 "Distributor Part Number", 
+		 "Supplier",
+		 "Part Number", 
 		 "Price",
 		 "Date Uploaded")
 

@@ -1,3 +1,1 @@
-1. Do a query on load to exclude all "Supplier lines" not associated with a number.
-
 2. Get code to generate the unique id and incorporate it into the file read.

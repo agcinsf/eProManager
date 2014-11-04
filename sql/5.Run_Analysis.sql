@@ -28,7 +28,8 @@ CREATE TABLE Supplier (
 	"Date Uploaded" text
 );
 
-COPY supplier FROM '/home/analyst/Desktop/temp/proposed.csv' with (FORMAT CSV, HEADER);
+--Load the supplier data without the lines with 'Price Removed' in them
+COPY supplier FROM '/home/analyst/Desktop/eProManager/temp/proposed_cleaned.csv' with (FORMAT CSV);
 
 
 --Clean the data (VERIFIED)
