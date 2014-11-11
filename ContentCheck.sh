@@ -7,28 +7,30 @@
 #	-p = proposed file location
 
 
-if ( ! getopts "iaph" opt); then
+if ( ! getopts "iahf" opt); then
 	printf	"\nUsage: `basename $0` options:
-		       	       -i = Install 
-			       -p = Proposed File Location, Campus, Supplier Name
-			       -a = Analyze Proposed File 
+		       	       -i = Install
+			       -a = Analyze vs All Content
+			       -f = Full Analysis; CurrentFile location, Spend Location, ProposedFile Location, Campus, Supplier Name
 			       -h = help\n\n";
 	exit $E_OPTERROR;
 fi
 
-while getopts "iaph" opt; do
+while getopts "ifha" opt; do
      case ${opt} in
-         p) fileloc=$2
-	    campus=$3
-	    supplier=$4
-	    dos2unix $fileloc
-	    python ./python/create_unique_part.py $fileloc $campus $supplier
+	 a) sudo -u postgres psql -f "./sql/5.Run_Analysis.sql";;
+	 i) sudo -u postgres psql -f "./sql/2.CreateDB.sql";;
+	 f) CurrentFileLoc=$2
+	    SpendLoc=$3
+ 	    ProposedFileLoc=$4
+	    Campus=$5
+	    SupplierName=$6
+	    python ./python/contract_analysis.py $CurrentFileLoc $SpendLoc $ProposedFileLoc $Campus $SupplierName 
+	    python ./python/create_unique_part.py $ProposedFileLoc $Campus $SupplierName
+	    dos2unix $ProposedFileLoc
 	    iconv -c -t UTF8 ./temp/proposed.csv > "./temp/proposed_cleaned.csv"
 	    rm ./temp/proposed.csv
-	;;
-	    
-	 i) sudo -u postgres psql -f "./sql/2.CreateDB.sql";;
-	 a) sudo -u postgres psql -f "./sql/5.Run_Analysis.sql";;
+	    ;;
 	 h) echo "h";;
      esac
 done
