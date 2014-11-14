@@ -22,6 +22,10 @@ function setEnv() {
 	touch cstore_fdw-master/CatalogData.cstore
 	sudo chmod -R 776 cstore_fdw-master
 
+	#Install coopr.pyomo
+	pip install coopr
+	pip install coopr.extras
+
 	cd cstore_fdw-master
 	PATH=/usr/lib/postgresql/9.3/bin:$PATH make
 	sudo PATH=/usr/local/pgsql/bin/:$PATH make install
