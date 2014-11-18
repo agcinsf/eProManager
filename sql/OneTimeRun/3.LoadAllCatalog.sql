@@ -1,6 +1,6 @@
 
 --Load the all catalog file
-COPY All_catalogs FROM '/home/analyst/Desktop/AllCatalogs.csv' with (FORMAT CSV); 
+COPY All_catalogs FROM '/home/analyst/Downloads/AllCatalogs.csv' with (FORMAT CSV); 
 
 
 --This table holds the item attributes for each item and is key to this application

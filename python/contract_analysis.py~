@@ -293,7 +293,7 @@ date = dt.date.today().strftime("%m/%d/%Y")
 
 Summary= df([dict(Supplier=Supplier,Spend=spenddollars,Validity_Percent=valid_percentage,Price_Difference=price_difference_dollars,Percentage_of_Increase=percentage,Quantity_Removed=removed,Quantity_Removed2=removed2,Removed_Spend = Removed_Spend_Dollars, Campus = Campus, Date = date),])
 
-Log = pd.read_csv('/home/analyst/eProManager/reports/Price File Log.csv')
+Log = pd.read_csv('/home/analyst/Desktop/eProManager/reports/Price File Log.csv')
 Log = Log.append(Summary)
-Log.to_csv('/home/analyst/eProManager/reports/Price File Log.csv', index = False)
+Log.to_csv('/home/analyst/Desktop/eProManager/reports/Price File Log.csv', index = False)
 print("Contract Analysis Completed")

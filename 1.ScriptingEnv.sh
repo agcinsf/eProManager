@@ -7,6 +7,13 @@ function setEnv() {
 	sudo apt-get update && sudo apt-get upgrade -y
 	sudo apt-get -y install git
 	sudo apt-get -y install dos2unix
+	sudo apt-get -y install python-dev
+	sudo apt-get -y install python-pip
+	sudo chmod 777 /home/analyst/anaconda/lib/python2.7/site-packages/
+
+	#Need to get fuzzy 
+	#wget https://pypi.python.org/packages/source/F/Fuzzy/Fuzzy-1.0.tar.gz
+	#untar it and then run "pip install -e ."	
 	sudo apt-get -y install postgresql-9.3
 	sudo apt-get -y install protobuf-c-compiler
 	sudo apt-get -y install libprotobuf-c0-dev
@@ -19,8 +26,9 @@ function setEnv() {
 	sudo apt-get -y install postgresql-server-dev-9.3
 	wget https://github.com/citusdata/cstore_fdw/archive/master.zip
 	unzip master.zip
+	sudo rm master.zip
 	touch cstore_fdw-master/CatalogData.cstore
-	sudo chmod -R 776 cstore_fdw-master
+	sudo chmod -R 777 cstore_fdw-master
 
 	#Install coopr.pyomo
 	pip install coopr
@@ -35,7 +43,7 @@ function setEnv() {
 
 	cd
 	sudo /etc/init.d/postgresql restart
-	sudo rm master.zip
+	
 }
 
 
