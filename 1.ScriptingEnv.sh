@@ -13,13 +13,15 @@ function setEnv() {
 
 	#Need to get fuzzy 
 	#wget https://pypi.python.org/packages/source/F/Fuzzy/Fuzzy-1.0.tar.gz
-	#untar it and then run "pip install -e ."	
+	#pip install -e https://pypi.python.org/packages/source/F/Fuzzy/Fuzzy-1.0.tar.gz
 	sudo apt-get -y install postgresql-9.3
 	sudo apt-get -y install protobuf-c-compiler
 	sudo apt-get -y install libprotobuf-c0-dev
-	wget http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.rackcdn.com/Anaconda-2.1.0-Linux-x86_64.sh
-	sudo chmod 777 Anaconda-2.1.0-Linux-x86_64.sh
-	sudo bash Anaconda-2.1.0-Linux-x86_64.sh
+	
+	#Anaconda Python needs to be installed Manually
+	#Go to the home page and download it.
+	#Then use bash on the file and it will install.
+
 	sudo apt-get -y install unzip
 	sudo apt-get -y install make
         sudo apt-get -y install libpq-dev
@@ -29,6 +31,8 @@ function setEnv() {
 	sudo rm master.zip
 	touch cstore_fdw-master/CatalogData.cstore
 	sudo chmod -R 777 cstore_fdw-master
+	sudo apt-get install google-drive-ocamlfuse
+
 
 	#Install coopr.pyomo
 	pip install coopr
@@ -43,6 +47,11 @@ function setEnv() {
 
 	cd
 	sudo /etc/init.d/postgresql restart
+	
+	#Create a Google Drive mount
+	mkdir /Desktop/Google-Drive
+	google-drive-ocamlfuse /Desktop/Google-Drive
+
 	
 }
 
