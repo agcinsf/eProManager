@@ -12,8 +12,9 @@ function setEnv() {
 	sudo chmod 777 /home/analyst/anaconda/lib/python2.7/site-packages/
 
 	#Need to get fuzzy 
-	#wget https://pypi.python.org/packages/source/F/Fuzzy/Fuzzy-1.0.tar.gz
-	#pip install -e https://pypi.python.org/packages/source/F/Fuzzy/Fuzzy-1.0.tar.gz
+	wget https://pypi.python.org/packages/source/F/Fuzzy/Fuzzy-1.0.tar.gz
+	pip install Fuzzy-1.0.tar.gz
+	rm Fuzzy-1.0.tar.gz
 	sudo apt-get -y install postgresql-9.3
 	sudo apt-get -y install protobuf-c-compiler
 	sudo apt-get -y install libprotobuf-c0-dev
@@ -33,20 +34,25 @@ function setEnv() {
 	sudo chmod -R 777 cstore_fdw-master
 	sudo apt-get install google-drive-ocamlfuse
 
+	#Install Facebook Prophet Forecasting tools
+	sudo pip install gcc
+	sudo pip install pystan
+	sudo pip install fbprophet
+
 
 	#Install coopr.pyomo
 	pip install coopr
 	pip install coopr.extras
 
-	cd cstore_fdw-master
-	PATH=/usr/lib/postgresql/9.3/bin:$PATH make
-	sudo PATH=/usr/local/pgsql/bin/:$PATH make install
-	sudo sed -i "s/shared_pre.*/shared_preload_libraries = 'cstore_fdw'/g" /etc/postgresql/9.3/main/postgresql.conf
-	sudo sed -i "s/\#shared_pre.*/shared_preload_libraries = 'cstore_fdw'/g" /etc/postgresql/9.3/main/postgresql.conf
-	sudo sed -i "s/\#password_encryption.*/password_encryption = 'on'/g" /etc/postgresql/9.3/main/postgresql.conf
+	#cd cstore_fdw-master
+	#PATH=/usr/lib/postgresql/9.5/bin:$PATH make
+	#sudo PATH=/usr/local/pgsql/bin/:$PATH make install
+	#sudo sed -i "s/shared_pre.*/shared_preload_libraries = 'cstore_fdw'/g" /etc/postgresql/9.3/main/postgresql.conf
+	#sudo sed -i "s/\#shared_pre.*/shared_preload_libraries = 'cstore_fdw'/g" /etc/postgresql/9.3/main/postgresql.conf
+	#sudo sed -i "s/\#password_encryption.*/password_encryption = 'on'/g" /etc/postgresql/9.3/main/postgresql.conf
 
 	cd
-	sudo /etc/init.d/postgresql restart
+	#sudo /etc/init.d/postgresql restart
 	
 	#Create a Google Drive mount
 	mkdir /Desktop/Google-Drive
